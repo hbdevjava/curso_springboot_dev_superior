@@ -1,8 +1,8 @@
-package com.cursoBS.repository;
+package com.cursoSB.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.cursoBS.entities.User;
+import com.cursoSB.entities.User;
 
 public interface UserRepositoty extends JpaRepository<User, Long> {
 

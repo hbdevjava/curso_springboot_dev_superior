@@ -1,4 +1,4 @@
-package com.cursoBS.config;
+package com.cursoSB.config;
 
 import java.util.Arrays;
 
@@ -7,8 +7,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.cursoBS.entities.User;
-import com.cursoBS.repository.UserRepositoty;
+import com.cursoSB.entities.User;
+import com.cursoSB.repository.UserRepositoty;
 
 @Configuration
 @Profile("test")
