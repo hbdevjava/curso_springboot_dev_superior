@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.cursoSB.entities.Category;
 import com.cursoSB.entities.Order;
+import com.cursoSB.entities.Product;
 import com.cursoSB.entities.User;
 import com.cursoSB.entities.unums.OrderStatus;
 import com.cursoSB.repository.CategoryRepository;
 import com.cursoSB.repository.OrderRepositoty;
+import com.cursoSB.repository.ProductRepository;
 import com.cursoSB.repository.UserRepositoty;
 
 @Configuration
@@ -28,6 +30,11 @@ public class TestConfig  implements CommandLineRunner{
 	
 	@Autowired //ESSA ANOTAÇAO CRIA UMA DEPENDENCIA DA INTERFACE USERREPOSITORY;
 	private CategoryRepository categoryRepository;
+	
+	@Autowired //ESSA ANOTAÇAO CRIA UMA DEPENDENCIA DA INTERFACE USERREPOSITORY;
+	private ProductRepository roductRepository;
+	
+	
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -43,9 +50,17 @@ public class TestConfig  implements CommandLineRunner{
 		Category cat2 = new Category(null, "Books");
 		Category cat3 = new Category(null, "Computers");
 		
+		Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
+		Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
+		Product p3 = new Product(null, "Macbook Pro", "Nam eleifend maximus tortor, at mollis.", 1250.0, "");
+		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
+		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
+		
 		userRepositoty.saveAll(Arrays.asList(u1, u2));
 		orderRepositoty.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		roductRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+		
 		
 	}
 	
