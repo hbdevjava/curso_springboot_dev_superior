@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.cursoSB.entities.Category;
 import com.cursoSB.entities.Order;
+import com.cursoSB.entities.OrderItem;
 import com.cursoSB.entities.Product;
 import com.cursoSB.entities.User;
 import com.cursoSB.entities.unums.OrderStatus;
 import com.cursoSB.repository.CategoryRepository;
+import com.cursoSB.repository.OrderItemRepositoty;
 import com.cursoSB.repository.OrderRepositoty;
 import com.cursoSB.repository.ProductRepository;
 import com.cursoSB.repository.UserRepositoty;
@@ -33,6 +35,9 @@ public class TestConfig  implements CommandLineRunner{
 	
 	@Autowired //ESSA ANOTAÇAO CRIA UMA DEPENDENCIA DA INTERFACE USERREPOSITORY;
 	private ProductRepository productRepository;
+	
+	@Autowired //ESSA ANOTAÇAO CRIA UMA DEPENDENCIA DA INTERFACE USERREPOSITORY;
+	private OrderItemRepositoty orderItemRepositoty;
 	
 	
 
@@ -70,10 +75,13 @@ public class TestConfig  implements CommandLineRunner{
 		
 		productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		
-		
-		
+		orderItemRepositoty.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
 		
 		
 		

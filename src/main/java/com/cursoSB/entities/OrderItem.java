@@ -8,13 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.cursoSB.entities.pk.OrderItemPk;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "tb_order_item")
 public class OrderItem implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId//ANOTAÇAO DE ID COMPOSTO
-	private OrderItemPk id;
+	//SEMPRE QUE CRIAR UMA CLASSE QUE SEJA UM ID COMPOSTO TEM QUE INSTANCIAR;
+	//ex: private OrderItemPk id = new OrderItemPk();
+	private OrderItemPk id = new OrderItemPk();
 	
 	
 	private Integer quantity;
@@ -46,7 +49,8 @@ public class OrderItem implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-
+	
+	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
 	}
