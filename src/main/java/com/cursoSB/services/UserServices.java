@@ -28,9 +28,9 @@ public class UserServices {
 		return repositoty.save(obj);
 	}
 	
-	public void delete(Long id) {
+	/* public void delete(Long id) {
 		repositoty.deleteById(id);
-	}
+	}*/
 		
 }
 
