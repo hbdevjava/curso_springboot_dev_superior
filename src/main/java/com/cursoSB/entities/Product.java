@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {
@@ -29,20 +31,22 @@ public class Product implements Serializable {
 	private String description;
 	private Double price;
 	private String imgURL;
-	
-	
-	
+
 	@ManyToMany
-	@JoinTable(name = "tb_product_category", 
-		joinColumns = @JoinColumn(name = "product_id"),
-		inverseJoinColumns = @JoinColumn (name = "category_id"))
+	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<>();
-	/*new HashSet() ==> GARANTE QUEA COLEÇAO NAO COMECE VALENDO NULL
-	 * COMEÇA VAZIA POREM INSTANCIADA;
+	/*
+	 * new HashSet() ==> GARANTE QUE A COLEÇAO NAO COMECE VALENDO NULL COMEÇA VAZIA
+	 * POREM INSTANCIADA;
 	 * 
-	 * HASHSET INVEZ DO SET ==> O SET É UMA INTERFACE E ELAS NAO PODEM SER 
+	 * HASHSET E NAO O SET ==> O SET É UMA INTERFACE E ELAS NAO PODEM SER
 	 * INTENCIADAS ASSIM COMO OCORRE COM LIST list = NEW ARRAYSLIST();
-	 *  */
+	 */
+
+	@OneToMany(mappedBy = "id.product")
+	private Set<OrderItem> items = new HashSet<>();
+	// SET E NAO O LIST?: PRA INFORMAR PRO JPA AQUI NAO VOU ADMITIR REPETIÇOES DO
+	// MESMO ITEM;
 
 	public Product() {
 
@@ -96,9 +100,17 @@ public class Product implements Serializable {
 	public void setImgURL(String imgURL) {
 		this.imgURL = imgURL;
 	}
-	
+
 	public Set<Category> getCategory() {
 		return categories;
+	}
+	@JsonIgnore // EVITA LUPING INFINITO
+	public Set<Order> getOrders() {
+		Set<Order> set = new HashSet<>();
+		for (OrderItem x : items) {
+			set.add(x.getOrder());
+		}
+		return set;
 	}
 
 	@Override

@@ -50,7 +50,7 @@ public class OrderItem implements Serializable {
 		this.price = price;
 	}
 	
-	@JsonIgnore
+	@JsonIgnore // EVITA LUPING INFINITO
 	public Order getOrder() {
 		return id.getOrder();
 	}
@@ -58,7 +58,7 @@ public class OrderItem implements Serializable {
 	public void setOrder(Order order) {
 		id.setOrder(order);
 	}
-
+	//@JsonIgnore // EVITA LUPING INFINITO
 	public Product getProduct() {
 		return id.getProduct();
 	}
