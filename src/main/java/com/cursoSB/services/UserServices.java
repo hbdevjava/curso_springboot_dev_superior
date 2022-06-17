@@ -28,9 +28,22 @@ public class UserServices {
 		return repositoty.save(obj);
 	}
 	
-	/* public void delete(Long id) {
+	 public void delete(Long id) {
 		repositoty.deleteById(id);
-	}*/
+	 }
+	 
+	 public User upDate(Long id, User obj) {
+		 User entity = repositoty.getOne(id);
+		 upDate(entity, obj);
+		 return repositoty.save(entity);
+	 }
+
+	private void upDate(User entity, User obj) {
+		entity.setName(obj.getName());
+		entity.setEmail(obj.getEmail());
+		entity.setPhone(obj.getPhone());
+		
+	}
 		
 }
 
