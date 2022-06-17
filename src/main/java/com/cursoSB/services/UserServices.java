@@ -3,6 +3,8 @@
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,11 +46,19 @@ public class UserServices {
 	 }
 	 
 	 public User upDate(Long id, User obj) {
-		 User entity = repositoty.getOne(id);
-		 upDate(entity, obj);
-		 return repositoty.save(entity);
+		 try {
+				
+			 User entity = repositoty.getOne(id);
+			 upDate(entity, obj);
+			 return repositoty.save(entity);
+				
+			}catch(EntityNotFoundException e) {
+				throw new ResourceNotFoundException(id);
+			}
+		
 	 }
-
+	 
+	 
 	private void upDate(User entity, User obj) {
 		entity.setName(obj.getName());
 		entity.setEmail(obj.getEmail());
